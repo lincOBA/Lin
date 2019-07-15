@@ -10,6 +10,6 @@ int main(int argc, char* argv[]) {
 
     Interpreter lin(argv[1]);
     lin.execute();
-//	Parser::printLex(argv[1]);
-	return 0;
+//  Parser::printLex(argv[1]);
+    return 0;
 }

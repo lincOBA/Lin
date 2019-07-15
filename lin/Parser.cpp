@@ -323,6 +323,7 @@ std::tuple<Token, std::string> Parser::next() {
     if (c == EOF) {
         return std::make_tuple(TK_EOF, "");
     }
+    //删除多余的无意义字符
     if (anyone(c, ' ', '\n', '\r', '\t')) {
         while (anyone(c, ' ', '\n', '\r', '\t')) {
             if (c == '\n') {
@@ -335,7 +336,7 @@ std::tuple<Token, std::string> Parser::next() {
             return std::make_tuple(TK_EOF, "");
         }
     }
-
+    //跳过注释，当前仅支持#开头的单行注释，TODO:1.添加多行注释；2.添加行间注释
     if (c == '#') {
     another_comment:
         while (c != '\n' && c != EOF) {
@@ -354,7 +355,7 @@ std::tuple<Token, std::string> Parser::next() {
             return std::make_tuple(TK_EOF, "");
         }
     }
-
+    //INTEGER or DOUBLE
     if (c >= '0' && c <= '9') {
         std::string lexeme{c};
         bool isDouble = false;
@@ -370,6 +371,7 @@ std::tuple<Token, std::string> Parser::next() {
         return !isDouble ? make_tuple(LIT_INT, lexeme)
                          : make_tuple(LIT_DOUBLE, lexeme);
     }
+    //关键字
     if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_') {
         std::string lexeme{c};
         char cn = peekNextChar();
@@ -384,7 +386,7 @@ std::tuple<Token, std::string> Parser::next() {
                    ? std::make_tuple(result->second, lexeme)
                    : std::make_tuple(TK_IDENT, lexeme);
     }
-
+    //字符
     if (c == '\'') {
         std::string lexeme;
         lexeme += getNextChar();
@@ -396,6 +398,7 @@ std::tuple<Token, std::string> Parser::next() {
         c = getNextChar();
         return std::make_tuple(LIT_CHAR, lexeme);
     }
+    //字符串
     if (c == '"') {
         std::string lexeme;
         char cn = peekNextChar();
@@ -407,6 +410,7 @@ std::tuple<Token, std::string> Parser::next() {
         c = getNextChar();
         return std::make_tuple(LIT_STR, lexeme);
     }
+    //其他符号
     if (c == '[') {
         return std::make_tuple(TK_LBRACKET, "[");
     }
