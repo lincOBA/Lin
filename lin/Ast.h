@@ -1,3 +1,33 @@
+/*
+@startuml
+AstNode <|-- Expression
+
+Expression <|-- BoolExpr
+Expression <|-- CharExpr
+Expression <|-- NullExpr
+Expression <|-- IntExpr
+Expression <|-- DoubleExpr
+Expression <|-- StringExpr
+Expression <|-- ArrayExpr
+Expression <|-- IdentExpr
+Expression <|-- IndexExpr
+Expression <|-- BinaryExpr
+Expression <|-- FunCallExpr
+Expression <|-- AssignExpr
+
+newpage
+
+AstNode <|-- Statement
+Statement <|-- BreakStmt
+Statement <|-- ContinueStmt
+Statement <|-- ExpressionStmt
+Statement <|-- ReturnStmt
+Statement <|-- IfStmt
+Statement <|-- WhileStmt
+
+@enduml
+ */
+
 #pragma once
 #include <deque>
 #include <map>

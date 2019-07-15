@@ -1,3 +1,22 @@
+/*
+@startuml
+Statement <--* Block
+Block  <--* Function
+Expression <--* Function
+
+Value <--* ExecResult
+Value <--* Variable
+
+Context *--> Variable
+Context *--> Function
+
+Context <|-- Runtime
+
+Runtime *--> BuiltinFuncType
+Runtime *--> Statement
+
+@enduml
+ */
 #pragma once
 
 #include <any>

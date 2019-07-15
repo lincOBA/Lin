@@ -50,6 +50,7 @@ void Interpreter::execute() {
 void Interpreter::enterContext(std::deque<lin::Context*>& ctxChain) {
     auto* tempContext = new Context;
     ctxChain.push_back(tempContext);
+    //equal to ctxChain.push_back(new lin::Context);
 }
 
 void Interpreter::leaveContext(std::deque<lin::Context*>& ctxChain) {
